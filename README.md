@@ -15,3 +15,5 @@ and run the app
 ```
 npm run start
 ```
+
+![Demo App](./assets/demoapp.png)
