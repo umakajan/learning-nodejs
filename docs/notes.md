@@ -27,6 +27,7 @@ Learning Objectives:
 - Static vs dynamic, images vs api
 - Mongoose allows us to elegantly work with our MongoDB database with object schemas. Object schemas are JavaScript objects we create that will represent the type of data we will be putting in our database.
 - Promises give us another option of how to work with asynchronous code. Promises return an object which promise to do some work. This object has separate callbacks for success and for failures. This lets us work with asynchronous code in a much more synchronous way. A really nice feature is that Promises can be combined into dependency chains.
+- It's not ideal that we have to actually set the state of our database in our server in order for our test to pass. The ideal thing would be that our test suite sets up the server and the database just the way it should be before the tests are run. And in more advanced testing, that's exactly what we would do. We'd have a before function that executes at the start of our test or test suites, that sets up the database with say, a message from Tim. The test then executes and then an after function would execute and remove that message, therefore returning the database back to a normal state. And those are some of the important concepts of testing and test-driven development.
 
 ## Essential Training
 - Every request is single-threaded. In Apache, the single thread waits for the file system to finish reading files before it can do anything else. Also known as blocking.
