@@ -26,6 +26,7 @@ Learning Objectives:
 - Socket.io enables real-time bidirectional communication
 - Static vs dynamic, images vs api
 - Mongoose allows us to elegantly work with our MongoDB database with object schemas. Object schemas are JavaScript objects we create that will represent the type of data we will be putting in our database.
+- Promises give us another option of how to work with asynchronous code. Promises return an object which promise to do some work. This object has separate callbacks for success and for failures. This lets us work with asynchronous code in a much more synchronous way. A really nice feature is that Promises can be combined into dependency chains.
 
 ## Essential Training
 - Every request is single-threaded. In Apache, the single thread waits for the file system to finish reading files before it can do anything else. Also known as blocking.

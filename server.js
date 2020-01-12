@@ -19,6 +19,8 @@ app.use(express.static(__dirname));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+mongoose.Promise = Promise;
+
 mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
     console.log('mongodb connected', err)
 })
@@ -37,14 +39,25 @@ app.get('/messages', (req, res) => {
 app.post('/messages', (req, res) => {
     var message = new Message(req.body);
 
-    message.save((err) => {
-        if (err) {
-            sendStatus(500);
-        } 
+    message
+        .save()
+        .then(() => {
+            console.log('saved')
+            return Message.findOne({ message: 'badword' })
+        })
+        .then(censored => {
+            if (censored) {
+                console.log('censored word found', censored);
+                return Message.deleteOne({ _id: censored.id})
+            }
         
-        io.emit('message', req.body)
-        res.sendStatus(200);
-    });
+            io.emit('message', req.body)
+            res.sendStatus(200);
+        })
+        .catch(err => {
+            res.sendStatus(500);
+            return console.error(err)
+        })
 });
 
 io.on('connection', socket => {
