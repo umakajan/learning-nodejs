@@ -6,9 +6,17 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+const mongoose = require('mongoose');
+
+const { dbURL } = require('./config');
+
 app.use(express.static(__dirname));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+
+mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true }, err => {
+    console.log('mongodb connected')
+})
 
 const messages = [
     { name: 'Tim', message: 'hi!'},
